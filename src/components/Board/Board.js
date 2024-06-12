@@ -1,43 +1,79 @@
-import React from "react";
-import { getCharacter } from "../../helper";
-import Ranks from "./Ranks";
-import Files from "./Files";
-import Pieces from "../Pieces/Pieces";
+import './Board.css'
+import { useAppContext }from '../../contexts/Context'
+
+import Ranks from './bits/Ranks'
+import Files from './bits/Files'
+import Pieces from '../Pieces/Pieces'
+import PromotionBox from '../Popup/PromotionBox/PromotionBox'
+import Popup from '../Popup/Popup'
+import GameEnds from '../Popup/GameEnds/GameEnds'
+
+import arbiter from '../../arbiter/arbiter'
+import { getKingPosition } from '../../arbiter/getMoves'
 
 const Board = () => {
-  const getClassName = (i, j) => {
-    return (i + j) % 2 === 0 ? "bg-light_tile" : "bg-dark_tile";
-  };
+    const ranks = Array(8).fill().map((x,i) => 8-i)
+    const files = Array(8).fill().map((x,i) => i+1)
 
-  const ranks = Array(8)
-    .fill()
-    .map((_, i) => 8 - i);
-  const files = Array(8)
-    .fill()
-    .map((_, i) => i + 1);
+    const { appState } = useAppContext();
+    const position = appState.position[appState.position.length - 1]
 
-  return (
-    <div className="h-screen flex items-center justify-center bg-bg_colour">
-      <div className="relative">
-        <Ranks ranks={ranks} />
-        <div className="TILES grid grid-cols-8 gap-0 relative w-[800px] h-[800px]">
-          {ranks.map((rank, i) =>
-            files.map((file, j) => (
-              <div
-                key={`${rank}${getCharacter(file)}`}
-                className={`w-[100px] h-[100px] flex items-center justify-center border ${getClassName(
-                  9 - i,
-                  j
-                )}`}
-              ></div>
-            ))
-          )}
-          <Pieces />
+    const checkTile = (() => {
+        const isInCheck =  (arbiter.isPlayerInCheck({
+            positionAfterMove : position,
+            player : appState.turn
+        }))
+
+        if (isInCheck)
+            return getKingPosition (position, appState.turn)
+
+        return null
+    })()
+
+    const getClassName = (i,j) => {
+        let c = 'tile'
+        c+= (i+j)%2 === 0 ? ' tile--dark ' : ' tile--light '
+        if (appState.candidateMoves?.find(m => m[0] === i && m[1] === j)){
+            if (position[i][j])
+                c+= ' attacking'
+            else 
+                c+= ' highlight'
+        }
+
+        if (checkTile && checkTile[0] === i && checkTile[1] === j) {
+            c+= ' checked'
+        }
+
+        return c
+    }
+
+    return <div className='board'>
+
+        <Ranks ranks={ranks}/>
+
+        <div className='tiles'>
+            {ranks.map((rank,i) => 
+                files.map((file,j) => 
+                    <div 
+                        key={file+''+rank} 
+                        i={i}
+                        j={j}
+                        className={`${getClassName(7-i,j)}`}>
+                    </div>
+                ))}
         </div>
-        <Files files={files} />
-      </div>
-    </div>
-  );
-};
 
-export default Board;
+        <Pieces/>
+
+        <Popup>
+            <PromotionBox />
+            <GameEnds />
+        </Popup>
+
+        <Files files={files}/>
+
+    </div>
+    
+}
+
+export default Board

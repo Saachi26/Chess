@@ -1,26 +1,49 @@
-import React from "react";
-import "./Pieces.css";
+import arbiter from '../../arbiter/arbiter';
+import { useAppContext }from '../../contexts/Context'
+import { generateCandidates } from '../../reducer/actions/move';
 
-const Piece = ({ rank, file, piece }) => {
-  const pieceStyle = {
-    top: `${(7 - rank) * 100}px`, // Adjusting rank for correct positioning from bottom
-    left: `${file * 100}px`,
-  };
+const Piece = ({
+    rank,
+    file,
+    piece,
+}) => {
 
-  const handleDragStart = (e) => {
-    e.stopPropagation(); // Prevent dragging the background
-    const pieceData = { rank, file, piece };
-    e.dataTransfer.setData("application/json", JSON.stringify(pieceData));
-  };
+    const { appState, dispatch } = useAppContext();
+    const { turn, castleDirection, position : currentPosition } = appState
 
-  return (
-    <div
-      className={`piece ${piece}`}
-      style={pieceStyle}
-      draggable={true}
-      onDragStart={handleDragStart} // Attach the drag start event handler
-    />
-  );
-};
+    const onDragStart = e => {
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain",`${piece},${rank},${file}`)
+        setTimeout(() => {
+            e.target.style.display = 'none'
+        },0)
 
-export default Piece;
+        if (turn === piece[0]){
+            const candidateMoves = 
+                arbiter.getValidMoves({
+                    position : currentPosition[currentPosition.length - 1],
+                    prevPosition : currentPosition[currentPosition.length - 2],
+                    castleDirection : castleDirection[turn],
+                    piece,
+                    file,
+                    rank
+                })
+            dispatch(generateCandidates({candidateMoves}))
+        }
+
+    }
+    const onDragEnd = e => {
+       e.target.style.display = 'block'
+     }
+ 
+    return (
+        <div 
+            className={`piece ${piece} p-${file}${rank}`}
+            draggable={true}   
+            onDragStart={onDragStart} 
+            onDragEnd={onDragEnd}
+
+        />)
+}
+
+export default Piece
