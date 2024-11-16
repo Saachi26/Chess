@@ -9,24 +9,22 @@ Welcome to the Chess Game repository! This is a fully functional chess game buil
 - **Piece movement**: All chess pieces can move according to the standard rules of chess.
 - **Check & Checkmate detection**: The game detects check and checkmate conditions.
 - **Undo move**: Players can undo the previous move.
-- **Responsive design**: Play on both desktop and mobile devices.
 
 ## Technologies Used
 
-- **Frontend**: [Insert frontend technologies here, e.g., React, HTML, CSS, etc.]
-- **Backend**: [If applicable, mention backend technologies such as Node.js, Express, etc.]
-- **Game Logic**: [Mention any specific game logic libraries or custom algorithms used]
+- **Frontend**:
+- **Backend**:
 
 ## Installation
 
 To get started, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/chess-game.git
-cd chess-game
+git clone https://github.com/Saachi26/Chess.git
+cd chess
 ```
 
-### Frontend (if separate)
+### Frontend
 
 If you're running the frontend separately, navigate to the `frontend` folder and install dependencies:
 
@@ -36,7 +34,7 @@ npm install
 npm start
 ```
 
-### Backend (if applicable)
+### Backend
 
 For the backend, navigate to the `backend` folder, install dependencies, and run the server:
 
@@ -45,13 +43,6 @@ cd backend
 npm install
 npm start
 ```
-
-## How to Play
-
-1. Launch the game in your browser.
-2. The game board will be displayed, with each player controlling one color.
-3. Click on a piece to select it, then click on a valid square to move it.
-4. The game will automatically update after each move, showing valid moves and checking for game-ending conditions.
 
 ## Contributing
 
@@ -66,7 +57,3 @@ If you would like to contribute to the development of this project, follow these
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- Thanks to [insert any acknowledgements, libraries, or people you'd like to credit].
