@@ -12,8 +12,8 @@ Welcome to the Chess Game repository! This is a fully functional chess game buil
 
 ## Technologies Used
 
-- **Frontend**:
-- **Backend**:
+Frontend: MERN stack, Tailwind CSS
+Backend: Node.js, Express.js
 
 ## Installation
 
