@@ -1,33 +1,20 @@
-import './App.css';
-import Board from './components/Board/Board';
-import { reducer } from './reducer/reducer'
-import { useReducer } from 'react'
-import { initGameState } from './constants';
-import AppContext from './contexts/Context'
-import Control from './components/Control/Control';
-import TakeBack from './components/Control/bits/TakeBack';
-import MovesList from './components/Control/bits/MovesList';
+import { useState } from "react";
+import "./output.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Homepage } from "./Pages/Homepage.jsx";
+import Game from "./Pages/Game.jsx";
 
 function App() {
-
-    const [appState, dispatch ] = useReducer(reducer,initGameState);
-
-    const providerState = {
-        appState,
-        dispatch
-    }
-
-    return (
-        <AppContext.Provider value={providerState} >
-            <div className="App">
-                <Board/>
-                <Control>
-                    <MovesList/>
-                    <TakeBack/>
-                </Control>
-            </div>
-        </AppContext.Provider>
-    ); 
+  return (
+    <div className=" App h-screen bg-slate-950">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

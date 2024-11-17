@@ -1,7 +1,13 @@
-@import './constants.css';
-@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+/* ./src/input.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,body {
+@import "./constants.css";
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap");
+
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -11,9 +17,8 @@ html,body {
   place-content: center;
   height: 100vh;
   background: var(--bg-color);
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: "Sofia Sans", sans-serif;
   grid-template-columns: auto 220px;
-
 }
 button {
   background: var(--dark-tile);
@@ -22,4 +27,4 @@ button {
   padding: 10px 30px;
   margin: 10px 0;
   font-size: 1.1em;
-} 
+}
