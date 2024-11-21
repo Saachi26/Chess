@@ -20,8 +20,8 @@ Welcome to the Chess Game repository! This is a fully functional chess game buil
 To get started, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/Saachi26/Chess.git
-cd chess
+git clone https://github.com/Saachi26/WePlayChess.git
+cd WePlayChess
 ```
 
 ### Frontend
