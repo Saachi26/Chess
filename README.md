@@ -1,4 +1,4 @@
-# Chess Game
+# WePlayCHess
 
 Welcome to the Chess Game repository! This is a fully functional chess game built with [insert technologies used]. It allows two players to compete against each other in a virtual chessboard, providing a smooth and enjoyable experience for players of all levels.
 
