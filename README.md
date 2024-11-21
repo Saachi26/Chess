@@ -1,4 +1,4 @@
-# WePlayCHess
+# WePlayChess
 
 Welcome to the Chess Game repository! This is a fully functional chess game built with [insert technologies used]. It allows two players to compete against each other in a virtual chessboard, providing a smooth and enjoyable experience for players of all levels.
 
@@ -8,7 +8,6 @@ Welcome to the Chess Game repository! This is a fully functional chess game buil
 - **Real-time board updates**: The board updates after each move.
 - **Piece movement**: All chess pieces can move according to the standard rules of chess.
 - **Check & Checkmate detection**: The game detects check and checkmate conditions.
-- **Undo move**: Players can undo the previous move.
 
 ## Technologies Used
 
